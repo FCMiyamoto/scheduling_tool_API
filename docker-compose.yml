@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  database:
+    container_name: db_mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootroot
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_DATABASE: my_db
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+    volumes:
+      - my_volume:/var/lib/database
+      - ./initdb.d:/docker-entrypoint-initdb.d
+
+  backend:
+    depends_on:
+      - database
+    container_name: back_node
+    image: shift_backend
+    build:
+      context: backend
+      dockerfile: ./Dockerfile
+    ports:
+      - 3001:3001
+    links:
+      - database
+
+volumes:
+  my_volume:
