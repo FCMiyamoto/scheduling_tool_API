@@ -3,7 +3,7 @@ version: '3'
 services:
   database:
     container_name: db_mysql
-    image: mysql:8.0
+    image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: rootroot
       MYSQL_USER: test
@@ -20,6 +20,8 @@ services:
   backend:
     depends_on:
       - database
+    env_file:
+      - ./backend/backend.env
     container_name: back_node
     image: shift_backend
     build:

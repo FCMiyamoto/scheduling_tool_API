@@ -1,18 +1,20 @@
+require('dotenv').config();
+
 const express = require('express');
-const router = express.Router();
 const mysql = require("mysql");
 const app = express();
 const port = 3001;
+const my_env = process.env;
 
 const connection = mysql.createConnection({
-    host: 'database',
-    user: 'root',
-    password: 'rootroot',
-    database: 'my_db',
-    // port: 3306
+    host: my_env.MYSQL_HOST,
+    user: my_env.MYSQL_USER,
+    password: my_env.MYSQL_PASSWORD,
+    database: my_env.MYSQL_DATABASE,
 })
 
 app.get('/', (req, res) => {
+    console.log(my_env);
     console.log('hello');
     res.send("Hello World!");
 });
