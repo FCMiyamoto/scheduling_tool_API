@@ -1,3 +1,4 @@
+import { resourceUsage } from "process";
 import { Shift } from "../../domain/Shift";
 import { IShiftRepository } from "../repository/IShiftRepository";
 
@@ -9,7 +10,7 @@ export class DeleteShift {
     }
 
     async execute(id: number) {
-        const shift = await this.shiftRepository.find(id);
-        return this.shiftRepository.delete(shift);
+        const shift = await this.shiftRepository.delete(id);
+        return shift;
     }
 }

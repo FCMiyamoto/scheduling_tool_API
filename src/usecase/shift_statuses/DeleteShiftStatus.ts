@@ -8,7 +8,7 @@ export class DeleteShiftStatus {
     }
 
     async execute(id: number) {
-        const shiftTerm = await this.shiftStatusRepository.find(id);
-        return this.shiftStatusRepository.delete(shiftTerm);
+        const shiftStatus = await this.shiftStatusRepository.delete(id);
+        return shiftStatus;
     }
 }

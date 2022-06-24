@@ -20,7 +20,6 @@ userRouter.get('/users/:id', async (req: express.Request, res: express.Response)
 
 userRouter.post('/users', async (req: express.Request, res: express.Response) => {
     const result = await userController.createUser(req, res);
-    console.log(result);
     res.send(result);
 })
 

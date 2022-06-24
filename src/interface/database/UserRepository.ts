@@ -23,7 +23,7 @@ export class UserRepository extends IUserRepository {
             "select * from Users where id = ?",
             id
         )
-        return this.convertModel(result[0]);
+        return result;
     }
 
     async findAll(): Promise<User[]> {
@@ -43,7 +43,7 @@ export class UserRepository extends IUserRepository {
         return result;
     }
 
-    async update(user: User): Promise<any> {
+    async update(user: User): Promise<User> {
         const result = await this.connection.execute(
             'update Users set username=?,password=? where id = ?',
             [user.username, user.password, user.id]
@@ -51,11 +51,11 @@ export class UserRepository extends IUserRepository {
         return result;
     }
 
-    async delete(user: User): Promise<any> {
+    async delete(id: number): Promise<User> {
         const result = await this.connection.execute(
             'delete from Users where id = ?',
-            user.id
+            id
         )
-        return this.convertModel(user);
+        return this.convertModel(result);
     }
 }

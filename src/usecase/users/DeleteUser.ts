@@ -9,7 +9,7 @@ export class DeleteUser {
     }
 
     async execute(id: number) {
-        const user = await this.userRepository.find(id);
-        return this.userRepository.delete(user);
+        const user = await this.userRepository.delete(id);
+        return user;
     }
 }

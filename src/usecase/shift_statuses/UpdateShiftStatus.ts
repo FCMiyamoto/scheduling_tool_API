@@ -9,6 +9,7 @@ export class UpdateShiftStatus {
 
     async execute(id: number, status: number) {
         const shiftStatus = await this.shiftStatusRepository.find(id);
+        shiftStatus.id = id;
         shiftStatus.status = status
         return this.shiftStatusRepository.update(shiftStatus);
     }

@@ -25,7 +25,7 @@ export class ShiftRepository extends IShiftRepository {
             "select * from Shifts where id = ?",
             id
         );
-        return this.convertModel(result[0]);
+        return result;
     }
 
     async findAll(): Promise<Shift[]> {
@@ -67,18 +67,18 @@ export class ShiftRepository extends IShiftRepository {
         return result;
     }
 
-    async update(shift: Shift): Promise<any> {
+    async update(shift: Shift): Promise<Shift> {
         const result = await this.connection.execute(
-            "update Shifts set status_id = ?, day = ? where id = ?",
-            [shift.status_id, shift.day, shift.id]
+            "update Shifts set term_id = ?, status_id = ?, day = ? where id = ?",
+            [shift.term_id, shift.status_id, shift.day, shift.id]
         );
         return result;
     }
 
-    async delete(shift: Shift): Promise<any> {
+    async delete(id: number): Promise<Shift> {
         const result = await this.connection.execute(
             "delete from Shifts where id = ?",
-            shift.id
+            id
         )
         return this.convertModel(result);
     }

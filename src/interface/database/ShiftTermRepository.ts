@@ -23,7 +23,7 @@ export class ShiftTermRepository extends IShiftTermRepository {
             'select * from Shift_Terms where id = ? limit 1',
             id
         )
-        return this.convertModel(result[0]);
+        return result;
     }
 
     async findAll(): Promise<ShiftTerm[]> {
@@ -43,7 +43,7 @@ export class ShiftTermRepository extends IShiftTermRepository {
         return result;
     }
 
-    async update(shiftTerm: ShiftTerm): Promise<any> {
+    async update(shiftTerm: ShiftTerm): Promise<ShiftTerm> {
         const result = this.connection.execute(
             "update Shift_Terms set term_start = ? , term_end = ? where id = ?",
             [shiftTerm.term_start, shiftTerm.term_end, shiftTerm.id]
@@ -51,10 +51,10 @@ export class ShiftTermRepository extends IShiftTermRepository {
         return result;
     }
 
-    async delete(shiftTerm: ShiftTerm): Promise<any> {
+    async delete(id: number): Promise<ShiftTerm> {
         const result = this.connection.execute(
             "delete from Shift_Terms where id = ?",
-            shiftTerm.id
+            id
         )
         return this.convertModel(result);
     }

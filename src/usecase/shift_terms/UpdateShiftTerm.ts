@@ -9,6 +9,7 @@ export class UpdateShiftTerm {
 
     async execute(id: number, term_start: Date, term_end: Date) {
         const shiftTerm = await this.shiftRepository.find(id);
+        shiftTerm.id = id;
         shiftTerm.term_start = term_start;
         shiftTerm.term_end = term_end;
         return this.shiftRepository.update(shiftTerm);
